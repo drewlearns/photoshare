@@ -1,22 +1,22 @@
 {
   "development": {
-    "username": "root",
-    "password": "password",
-    "database": "photos",
+    "username": "6s1qbAZAY2yYjt3v",
+    "password": "ObtL0vRVEgWv1nI7",
+    "database": "mymaria_db",
     "host": "localhost",
     "dialect": "mariadb"
   },
   "test": {
-    "username": "root",
-    "password": "password",
-    "database": "photos",
+    "username": "6s1qbAZAY2yYjt3v",
+    "password": "ObtL0vRVEgWv1nI7",
+    "database": "phomymaria_dbtos",
     "host": "localhost",
     "dialect": "mariadb"
   },
   "production": {
-    "username": "root",
-    "password": "password",
-    "database": "photos",
+    "username": "6s1qbAZAY2yYjt3v",
+    "password": "ObtL0vRVEgWv1nI7",
+    "database": "mymaria_db",
     "host": "localhost",
     "dialect": "mariadb"
   }
