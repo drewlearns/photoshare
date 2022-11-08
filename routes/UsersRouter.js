@@ -21,9 +21,15 @@ UsersRouter.route("/login").post(async (request, response) => {
               request.session.userId = user.id; 
               response.redirect("/");
             } else {
+              alert("Wrong Password")
               response.redirect("/login");
             }
           });
+        }
+        else {
+          response.status(401)
+          console.log("401 error")
+          response.redirect("/badlogin")
         }
       })
       .catch((error) => {

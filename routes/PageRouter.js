@@ -1,20 +1,19 @@
 const express = require("express");
 const PageRouter = express.Router();
 const db = require("../models");
-const app2= express.Router()
+const app2 = express.Router();
 
 PageRouter.get("/", (request, response) => {
   if (request.session.userId) {
     db.photo
       .findAll()
       .then((photos) => {
-        console.log("GET IMAGES"); 
-        response.render("index", { "data":photos });
+        console.log("GET IMAGES");
+        response.render("index", { data: photos });
       })
       .catch((error) => {
         response.send(error);
       });
-      
   } else {
     response.redirect("/login");
   }
@@ -29,7 +28,11 @@ PageRouter.get("/photo", (request, response) => {
 });
 PageRouter.get("/login", (request, response) => {
   console.log("/LOGGING IN!");
-  response.render("login");
+  response.render("login", { data: "" });
+});
+PageRouter.get("/badlogin", (request, response) => {
+  console.log("/LOGGING IN!");
+  response.render("login", { data: "Bad Login Credentials" });
 });
 PageRouter.get("/signUp", (request, response) => {
   console.log("/signUp");
@@ -40,6 +43,10 @@ PageRouter.get("/logout", (request, response) => {
   request.session.destroy(() => {
     response.redirect("/login");
   });
+});
+PageRouter.get("/*", (request, response) => {
+  console.log("404");
+  response.render("404");
 });
 
 module.exports = PageRouter;
