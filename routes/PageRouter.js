@@ -1,10 +1,29 @@
 const express = require("express");
 const PageRouter = express.Router();
 const db = require("../models");
-const app2 = express.Router();
+const fs = require("fs");
 
 PageRouter.get("/", (request, response) => {
   if (request.session.userId) {
+    const { exec } = require("child_process");
+    exec(
+      `for item in $(ls $(pwd)/public/images); do
+      if [ $( file --mime-type $(pwd)/public/images/$item -b ) != "image/jpeg" ] && [ $( file --mime-type $(pwd)/public/images/$item -b ) != "image/png" ]; then
+      echo "$(pwd)/public/images/$item"
+      fi; 
+      done;`,
+      (error, stdout, stderr) => {
+        if (stdout) {
+          fs.unlink(stdout.slice(0, -1), (err) => {
+            if (err) {
+              throw err;
+            }
+          });
+          console.log(`Deleted ${stdout} because it wasn't an image`);
+        }
+      }
+    );
+
     db.photo
       .findAll()
       .then((photos) => {
